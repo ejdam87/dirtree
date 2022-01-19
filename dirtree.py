@@ -118,7 +118,10 @@ def parse_string_tree(string: str) -> Directory:
     return parse_rec(root_name, rows[1:], 0, max_level(rows))
 
 
-def parse_rec(name, rows_left, level, max_level):
+def parse_rec(name: str, 
+              rows_left: List[str],
+              level: int,
+              max_level: int) -> Directory:
 
     if level == max_level:
         return Directory(name, [])
@@ -136,7 +139,7 @@ def parse_rec(name, rows_left, level, max_level):
     return Directory(name, subdirs)
 
 
-def max_level(rows):
+def max_level(rows: List[str]) -> int:
 
     current = 0
     for row in rows:
@@ -149,7 +152,7 @@ def max_level(rows):
     return current
 
 
-def space_from_left(row):
+def space_from_left(row: str) -> int:
 
     total = 0
 
@@ -161,10 +164,3 @@ def space_from_left(row):
 
     return total
 
-
-
-dr = load_dirtree("D:\Documents\Git\dirtree-creator")
-
-to_parse = str(dr)
-
-print(parse_string_tree(to_parse))
