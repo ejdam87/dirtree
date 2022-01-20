@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import filedialog
-import file_lookup
 from typing import Optional
 import os
 
@@ -41,6 +40,7 @@ class Window:
 
         self.root_folder = None
 
+        # --- Displayin' widgets
         self.entry.pack(expand=True)
         self.submit_button.pack(expand=True)
         self.select_root_button.pack(expand=True)
@@ -57,7 +57,6 @@ class Window:
         needle = self.entry.get()
         val = lookup(self.root_folder, needle)
         self.result.set(val)
-
 
 
 window = Window()

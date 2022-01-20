@@ -2,16 +2,21 @@ from typing import List
 import os
 import shutil
 from directory import Directory
+import shutil
+
 
 def create_dirtree(path: str, tree: Directory) -> None:
 
-    os.mkdir(path + os.path.sep + tree.name)
+    new_path = path + os.path.sep + tree.name
+
+    if not os.path.isdir(new_path):
+        os.mkdir(new_path)
 
     if tree.dirs == []:
         return
 
     for subdir in tree.dirs:
-        create_dirtree(path + os.path.sep + tree.name, subdir)
+        create_dirtree(new_path, subdir)
 
 
 def load_dirtree(path: str) -> Directory:
@@ -51,18 +56,21 @@ def parse_rec(name: str,
               rows_left: List[str],
               level: int,
               max_level: int) -> Directory:
-
+    
     if level == max_level:
         return Directory(name, [])
 
     subdirs = []
     for i, child in enumerate(rows_left):
 
-        indent = space_from_left(child)
+        indent = len(child) - len(child.lstrip())
         new = child.lstrip()
         new_level = (indent - 1) // 3 + 1
 
-        if new_level == level + 1:
+        if new_level <= level:  # We reached end of subdirs
+            break
+
+        if new_level == level + 1:  # Found subdir
             subdirs.append(parse_rec(new, rows_left[i + 1:], level + 1, max_level))
 
     return Directory(name, subdirs)
@@ -73,23 +81,9 @@ def max_level(rows: List[str]) -> int:
     current = 0
     for row in rows:
         
-        indent = space_from_left(row)
+        indent = len(row) - len(row.lstrip())
         level = (indent - 1) // 3 + 1
         if level > current:
             current = level
 
     return current
-
-
-def space_from_left(row: str) -> int:
-
-    total = 0
-
-    for char in row:
-        if char != " ":
-            break
-
-        total += 1
-
-    return total
-
