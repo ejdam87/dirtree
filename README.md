@@ -8,3 +8,4 @@ Future updates:
 
 - Extract all files from given dirtree to one folder containing them
 
+![](https://github.com/ejdam87/dirtree/blob/master/showcase.png)
