@@ -1,8 +1,6 @@
 from typing import List
 import os
-import shutil
 from directory import Directory
-import shutil
 
 
 def create_dirtree(path: str, tree: Directory) -> None:

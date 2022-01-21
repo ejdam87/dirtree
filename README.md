@@ -8,4 +8,10 @@ Future updates:
 
 - Extract all files from given dirtree to one folder containing them
 
+Used libraries:
+
+- tkinter (GUI framework)
+- os (communicate with OS)
+- typing (type signatures)
+
 ![](https://github.com/ejdam87/dirtree/blob/master/showcase.png)
